@@ -6,7 +6,11 @@ class Tideverify < Formula
   version "1.0"
 
   def install
-    bin.install "tideverify"  # adjust this path depending on what’s in the tar.gz
+    # Extract the inner tarball
+    system "tar", "-xzf", "tideverify-1.0.tar.gz"
+
+    # Install the binary from the extracted contents
+    bin.install "tideverify/tideverify"
     system "codesign", "--force", "--sign", "-", "#{bin}/tideverify"
   end
 end
